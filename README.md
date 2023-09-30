@@ -2,7 +2,6 @@
 
 <br>
 
-![alt text](/home/adrian/Pulpit/GitHub/Różne_nie do publikacji/About me png/Bin.png)
 
 <img alt="Static Badge" src="https://img.shields.io/badge/Program%20*.*bin%20-%20bin?labelColor=green&color=green"> 
 <br>
