@@ -1,0 +1,90 @@
+<html>
+<head>
+<title>txtbin.py</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #629755; font-style: italic;}
+.s1 { color: #a9b7c6;}
+.s2 { color: #cc7832;}
+.s3 { color: #6a8759;}
+.s4 { color: #6897bb;}
+.s5 { color: #808080;}
+</style>
+</head>
+<body bgcolor="#2b2b2b">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+txtbin.py</font>
+</center></td></tr></table>
+<pre><span class="s0">''' Convert *.*bin file 
+@AdrianSzklarski, 10.2023'''</span>
+
+<span class="s2">import </span><span class="s1">os</span>
+
+<span class="s2">class </span><span class="s1">Convert:</span>
+
+    <span class="s2">def </span><span class="s1">__init__(self):</span>
+        <span class="s1">self.help_doc = </span><span class="s3">&quot;Program operation: - Adding a text file to the txt directory. &quot; </span><span class="s1">\</span>
+                        <span class="s3">&quot;The program converts the contents to *.*bin and displays in the terminal - &quot; </span><span class="s1">\</span>
+                        <span class="s3">&quot;You can directly upload *.*bin file o display it in the terminal&quot;</span>
+
+        <span class="s1">self.linkTXT = </span><span class="s3">r'/home/adrian/Pulpit/GitHub/BIN/txt/data.txt'</span>
+        <span class="s1">self.link = </span><span class="s3">r'/home/adrian/Pulpit/GitHub/BIN/bin/data.bin'</span>
+        <span class="s1">self.txt_dir = os.path.dirname(self.linkTXT)</span>
+        <span class="s1">self.bin_dir = os.path.dirname(self.link)</span>
+
+        <span class="s1">self.get_txt_to_bin()</span>
+        <span class="s1">self.get_read_binary()</span>
+
+    <span class="s2">def </span><span class="s1">get_txt_to_bin(self):</span>
+        <span class="s0">'''Convert txt to bin file 
+        Method used if you have a txt file'''</span>
+        <span class="s2">with </span><span class="s1">open(self.txt_dir + </span><span class="s3">'/data.txt'</span><span class="s2">, </span><span class="s3">'r'</span><span class="s1">) </span><span class="s2">as </span><span class="s1">f:</span>
+            <span class="s1">string = f.read()</span>
+            <span class="s1">string = string.split()</span>
+
+            <span class="s1">stringtab = []</span>
+            <span class="s2">for </span><span class="s1">x </span><span class="s2">in </span><span class="s1">range(</span><span class="s4">0</span><span class="s2">, </span><span class="s1">len(string)):</span>
+                <span class="s1">stringtab.append([string[x]])</span>
+
+            <span class="s2">with </span><span class="s1">open(self.bin_dir + </span><span class="s3">'/data.bin'</span><span class="s2">, </span><span class="s3">'w'</span><span class="s1">) </span><span class="s2">as </span><span class="s1">fbin:</span>
+                <span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">stringtab:</span>
+                    <span class="s2">for </span><span class="s1">j </span><span class="s2">in </span><span class="s1">i:</span>
+                        <span class="s1">p = j + </span><span class="s3">'</span><span class="s2">\n</span><span class="s3">'</span>
+                        <span class="s2">for </span><span class="s1">k </span><span class="s2">in </span><span class="s1">p:</span>
+                            <span class="s1">binstring = format(ord(k)</span><span class="s2">, </span><span class="s3">'b'</span><span class="s1">).encode()  </span><span class="s5"># bin</span>
+                            <span class="s1">decstring = format(ord(k)).encode()  </span><span class="s5"># hex</span>
+                            <span class="s1">resume = str(binstring)</span>
+                            <span class="s1">fbin.write(resume + </span><span class="s3">'</span><span class="s2">\n</span><span class="s3">'</span><span class="s1">)</span>
+
+    <span class="s2">def </span><span class="s1">get_read_binary(self):</span>
+        <span class="s0">'''Convert bin to text in the terminal'''</span>
+
+        <span class="s5"># Opening the binary file in binary mode as rb(read binary)</span>
+        <span class="s2">with </span><span class="s1">open(self.bin_dir + </span><span class="s3">'/data.bin'</span><span class="s2">, </span><span class="s1">mode=</span><span class="s3">'rb'</span><span class="s1">) </span><span class="s2">as </span><span class="s1">f:</span>
+            <span class="s1">data = str(f.read())</span>
+            <span class="s1">clear_data = data.replace(</span><span class="s3">'&quot;'</span><span class="s2">, </span><span class="s3">''</span><span class="s1">).replace(data[</span><span class="s4">0</span><span class="s1">]</span><span class="s2">, </span><span class="s3">''</span><span class="s1">)</span>
+
+        <span class="s1">arrays = [[]</span><span class="s2">, </span><span class="s1">[]</span><span class="s2">, </span><span class="s1">[]]</span>
+
+        <span class="s5"># arrays[0]: array, arrays[1]: clear array, arrays[2]: indices</span>
+
+        <span class="s5">#  Clearing a file of newline and quotation marks</span>
+        <span class="s1">[arrays[</span><span class="s4">0</span><span class="s1">].append(i) </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">clear_data]</span>
+        <span class="s1">[arrays[</span><span class="s4">1</span><span class="s1">].append(arrays[</span><span class="s4">0</span><span class="s1">][j]) </span><span class="s2">for </span><span class="s1">j </span><span class="s2">in </span><span class="s1">range(</span><span class="s4">0</span><span class="s2">, </span><span class="s1">len(arrays[</span><span class="s4">0</span><span class="s1">])</span><span class="s2">, </span><span class="s4">1</span><span class="s1">)</span>
+        <span class="s2">if </span><span class="s1">arrays[</span><span class="s4">0</span><span class="s1">][j] != </span><span class="s3">&quot;n&quot; </span><span class="s2">and </span><span class="s1">arrays[</span><span class="s4">0</span><span class="s1">][j] != </span><span class="s3">&quot;</span><span class="s2">\\</span><span class="s3">&quot;</span><span class="s1">]</span>
+        <span class="s2">del </span><span class="s1">arrays[</span><span class="s4">1</span><span class="s1">][</span><span class="s4">0</span><span class="s1">]</span>
+        <span class="s2">del </span><span class="s1">arrays[</span><span class="s4">1</span><span class="s1">][-</span><span class="s4">1</span><span class="s1">]</span>
+        <span class="s1">[arrays[</span><span class="s4">2</span><span class="s1">].append(i) </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(len(arrays[</span><span class="s4">1</span><span class="s1">])) </span><span class="s2">if </span><span class="s1">arrays[</span><span class="s4">1</span><span class="s1">][i] == </span><span class="s3">&quot;'&quot;</span><span class="s1">]</span>
+
+        <span class="s1">word = </span><span class="s3">''</span><span class="s1">.join(arrays[</span><span class="s4">1</span><span class="s1">]).replace(</span><span class="s3">&quot;''&quot;</span><span class="s2">, </span><span class="s3">&quot;</span><span class="s2">\n</span><span class="s3">&quot;</span><span class="s1">)</span>
+        <span class="s1">text = </span><span class="s3">&quot;&quot;</span><span class="s1">.join(chr(int(s</span><span class="s2">, </span><span class="s4">2</span><span class="s1">)) </span><span class="s2">for </span><span class="s1">s </span><span class="s2">in </span><span class="s1">word.split())</span>
+
+        <span class="s2">return </span><span class="s1">text</span>
+
+    <span class="s2">def </span><span class="s1">__str__(self):</span>
+        <span class="s2">return </span><span class="s3">f'Your text:</span><span class="s2">\n {</span><span class="s1">self.get_read_binary()</span><span class="s2">}</span><span class="s3">'</span>
+</pre>
+</body>
+</html>

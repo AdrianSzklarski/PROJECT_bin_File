@@ -54,7 +54,7 @@ class Convert:
         #  Clearing a file of newline and quotation marks
         [arrays[0].append(i) for i in clear_data]
         [arrays[1].append(arrays[0][j]) for j in range(0, len(arrays[0]), 1)
-         if arrays[0][j] != "n" and arrays[0][j] != "\\"]
+        if arrays[0][j] != "n" and arrays[0][j] != "\\"]
         del arrays[1][0]
         del arrays[1][-1]
         [arrays[2].append(i) for i in range(len(arrays[1])) if arrays[1][i] == "'"]
