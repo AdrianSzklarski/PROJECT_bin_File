@@ -1,4 +1,4 @@
-'''Start file'''
+''' Start file '''
 from modules.txtbin import Convert
 
 if __name__ == '__main__':
