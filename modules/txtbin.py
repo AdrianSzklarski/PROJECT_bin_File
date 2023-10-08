@@ -6,9 +6,9 @@ import os
 class Convert:
 
     def __init__(self):
-        self.help_doc = "Program operation: - Adding a text file to the txt directory. " \
-                        "The program converts the contents to *.*bin and displays in the terminal - " \
-                        "You can directly upload *.*bin file o display it in the terminal"
+        self.help_doc = """Program operation: - Adding a text file to the txt directory.
+                        The program converts the contents to *.*bin and displays in the terminal - 
+                        You can directly upload *.*bin file o display it in the terminal"""
 
         self.linkTXT = r'/home/adrian/Pulpit/GitHub/BIN/txt/data.txt'
         self.link = r'/home/adrian/Pulpit/GitHub/BIN/bin/data.bin'
@@ -22,16 +22,16 @@ class Convert:
         '''Convert txt to bin file
         Method used if you have a txt file'''
         with open(self.txt_dir + '/data.txt', 'r') as f:
-            string = f.read()
-            string = string.split()
+            read_txt_file = f.read()
+            read_txt_file = read_txt_file.split()
 
-            stringtab = []
-            for x in range(0, len(string)):
-                stringtab.append([string[x]])
+            text_in_the_table = []
+            for x in range(0, len(read_txt_file)):
+                text_in_the_table.append([read_txt_file[x]])
 
             with open(self.bin_dir + '/data.bin', 'w') as fbin:
-                for i in stringtab:
-                    for j in i:
+                for iteration_txt in text_in_the_table:
+                    for j in iteration_txt:
                         p = j + '\n'
                         for k in p:
                             binstring = format(ord(k), 'b').encode()  # bin
@@ -66,3 +66,5 @@ class Convert:
 
     def __str__(self):
         return f'Your text:\n {self.get_read_binary()}'
+
+
